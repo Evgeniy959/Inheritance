@@ -1,4 +1,4 @@
-#include<iostream>
+п»ї#include<iostream>
 using namespace std;
 
 class Box
@@ -82,5 +82,5 @@ void main()
 	box.open();
 	box.close();
 	box.info();*/
-	GiftBox box(2, 3, 4, "С котами и мышами", "Зеленый бантик");
+	GiftBox box(2, 3, 4, "РЎ РєРѕС‚Р°РјРё Рё РјС‹С€Р°РјРё", "Р—РµР»РµРЅС‹Р№ Р±Р°РЅС‚РёРє");
 }
