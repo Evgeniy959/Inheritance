@@ -1,4 +1,4 @@
-#include<iostream>
+ï»¿#include<iostream>
 #include<string>
 using namespace std;
 
@@ -23,14 +23,14 @@ public:
 	void set_last_name(const string& last_name)
 	{
 		this->last_name = last_name;
-		if (last_name[0] >= 'a' && last_name[0] <= 'z' || last_name[0] >= 'à' && last_name[0] <= 'ÿ') this->last_name[0] -= 32;
-		else if (last_name[0] == '¸') this->last_name[0] -= 16;
+		if (last_name[0] >= 'a' && last_name[0] <= 'z' || last_name[0] >= 'Ð°' && last_name[0] <= 'Ñ') this->last_name[0] -= 32;
+		else if (last_name[0] == 'Ñ‘') this->last_name[0] -= 16;
 	}
 	void set_first_name(const string& first_name)
 	{
 		this->first_name = first_name;
-		if (first_name[0] >= 'a' && first_name[0] <= 'z' || first_name[0] >= 'à' && first_name[0] <= 'ÿ') this->first_name[0] -= 32;
-		else if (first_name[0] == '¸') this->first_name[0] -= 16;
+		if (first_name[0] >= 'a' && first_name[0] <= 'z' || first_name[0] >= 'Ð°' && first_name[0] <= 'Ñ') this->first_name[0] -= 32;
+		else if (first_name[0] == 'Ñ‘') this->first_name[0] -= 16;
 	}
 	void set_age(unsigned int age)
 	{
@@ -53,7 +53,7 @@ public:
 	//			Methods:
 	void info()
 	{
-		cout << last_name << " " << first_name << " " << age << " ëåò" << endl;
+		cout << last_name << " " << first_name << " " << age << " Ð»ÐµÑ‚" << endl;
 	}
 };
 
@@ -97,13 +97,13 @@ public:
 	void info()
 	{
 		Human::info();
-		cout << "Ñïåöèàëüíîñòü:\t" << speciality << ",\tãðóïïà:\t" << group << ",\tóñïåâàåìîñòü:" << rating << ";\n";
+		cout << "Ð¡Ð¿ÐµÑ†Ð¸Ð°Ð»ÑŒÐ½Ð¾ÑÑ‚ÑŒ:\t" << speciality << ",\tÐ³Ñ€ÑƒÐ¿Ð¿Ð°:\t" << group << ",\tÑƒÑÐ¿ÐµÐ²Ð°ÐµÐ¼Ð¾ÑÑ‚ÑŒ:" << rating << ";\n";
 	}
 };
 class Teacher :public Human
 {
 	string speciality;
-	unsigned int experience_worke; // îïûò ðàáîòû ïðåïîäàâàòåëåì
+	unsigned int experience_worke; // Ð¾Ð¿Ñ‹Ñ‚ Ñ€Ð°Ð±Ð¾Ñ‚Ñ‹ Ð¿Ñ€ÐµÐ¿Ð¾Ð´Ð°Ð²Ð°Ñ‚ÐµÐ»ÐµÐ¼
 public:
 	const string& get_speciality()const
 	{
@@ -118,7 +118,7 @@ public:
 		this->speciality = speciality;
 		for (int i = 1; speciality[i]; i++)
 		{
-			if (!(speciality[i] >= 'a' && speciality[i] <= 'z' || speciality[i] >= 'à' && speciality[i] <= 'ÿ' || speciality[i] == '¸')) throw exception("speciality");
+			if (!(speciality[i] >= 'a' && speciality[i] <= 'z' || speciality[i] >= 'Ð°' && speciality[i] <= 'Ñ' || speciality[i] == 'Ñ‘')) throw exception("speciality");
 		}
 	}
 	void set_experience_worke(unsigned int experience_worke)
@@ -143,7 +143,7 @@ public:
 	void info()
 	{
 		Human::info();
-		cout << "Ñïåöèàëüíîñòü:\t" << speciality << ", îïûò ðàáîòû ïðåïîäàâàòåëåì: " << experience_worke << " ëåò." << endl;
+		cout << "Ð¡Ð¿ÐµÑ†Ð¸Ð°Ð»ÑŒÐ½Ð¾ÑÑ‚ÑŒ:\t" << speciality << ", Ð¾Ð¿Ñ‹Ñ‚ Ñ€Ð°Ð±Ð¾Ñ‚Ñ‹ Ð¿Ñ€ÐµÐ¿Ð¾Ð´Ð°Ð²Ð°Ñ‚ÐµÐ»ÐµÐ¼: " << experience_worke << " Ð»ÐµÑ‚." << endl;
 	}
 };
 
@@ -179,20 +179,20 @@ public:
 	void info()
 	{
 		Student::info();
-		cout << "Òåìà äèïëîìíîãî ïðîåêòà: " << diploma_theme << endl;
+		cout << "Ð¢ÐµÐ¼Ð° Ð´Ð¸Ð¿Ð»Ð¾Ð¼Ð½Ð¾Ð³Ð¾ Ð¿Ñ€Ð¾ÐµÐºÑ‚Ð°: " << diploma_theme << endl;
 	}
 };
 
 void main()
 {
 	setlocale(LC_ALL, "");
-	Human human("òóïåíêî", "âàñèëèé", 18);
+	Human human("Ñ‚ÑƒÐ¿ÐµÐ½ÐºÐ¾", "Ð²Ð°ÑÐ¸Ð»Ð¸Ð¹", 18);
 	human.info();
 
-	Student ivan("îñòðîóìíûé", "èâàí", 19, "Êèòàéñêàÿ ôèëîñîôèÿ", "OST_01", 4.9);
+	Student ivan("Ð¾ÑÑ‚Ñ€Ð¾ÑƒÐ¼Ð½Ñ‹Ð¹", "Ð¸Ð²Ð°Ð½", 19, "ÐšÐ¸Ñ‚Ð°Ð¹ÑÐºÐ°Ñ Ñ„Ð¸Ð»Ð¾ÑÐ¾Ñ„Ð¸Ñ", "OST_01", 4.9);
 	ivan.info();
 
-	Teacher teacher("àáðàìîâ", "àíòîí", 45, "Mate@##$matics", 20);
+	Teacher teacher("Ð°Ð±Ñ€Ð°Ð¼Ð¾Ð²", "Ð°Ð½Ñ‚Ð¾Ð½", 45, "Mate@##$matics", 20);
 	teacher.info();
 
 	Graduate jesse("pinkman", "jesse", 25, "Methamphitamine manufacturing", "WithWalter", 4.5, "Methamphitamine distribution");
