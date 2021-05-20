@@ -118,7 +118,8 @@ public:
 		this->speciality = speciality;
 		for (int i = 1; speciality[i]; i++)
 		{
-			if (!(speciality[i] >= 'a' && speciality[i] <= 'z' || speciality[i] >= 'а' && speciality[i] <= 'я' || speciality[i] == 'ё')) throw exception("speciality");
+			if (!(speciality[i] >= 'a' && speciality[i] <= 'z' || speciality[i] >= 'а' && speciality[i] <= 'я' || speciality[i] == 'ё')) 
+			throw exception("speciality");
 		}
 	}
 	void set_experience_worke(unsigned int experience_worke)
