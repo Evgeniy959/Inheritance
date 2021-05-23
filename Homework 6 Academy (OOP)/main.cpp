@@ -119,7 +119,7 @@ public:
 		for (int i = 1; speciality[i]; i++)
 		{
 			if (!(speciality[i] >= 'a' && speciality[i] <= 'z' || speciality[i] >= 'а' && speciality[i] <= 'я' || speciality[i] == 'ё')) 
-			throw exception("speciality");
+			 throw exception("speciality");
 		}
 	}
 	void set_experience_worke(unsigned int experience_worke)
@@ -193,9 +193,12 @@ void main()
 	Student ivan("остроумный", "иван", 19, "Китайская философия", "OST_01", 4.9);
 	ivan.info();
 
-	Teacher teacher("абрамов", "антон", 45, "Mate@##$matics", 20);
-	teacher.info();
+	//Teacher teacher("абрамов", "антон", 45, "Mate@##$matics", 20);
+	//teacher.info();
 
 	Graduate jesse("pinkman", "jesse", 25, "Methamphitamine manufacturing", "WithWalter", 4.5, "Methamphitamine distribution");
 	jesse.info();
+
+	Teacher test("Тупенко123", "Вася45", 18, "Хорошая", 3);
+	test.info();
 }
