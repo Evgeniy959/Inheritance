@@ -1,6 +1,10 @@
 ﻿#include<iostream>
 #include<string>
+#include<regex>
 using namespace std;
+
+#define delimiter "\n-------------------------------------------------------\n"
+
 
 class Human
 {
@@ -40,16 +44,17 @@ public:
 		set_age(age);
 		cout << "HConstructor:\t" << this << endl;
 	}
-	~Human()
+	virtual ~Human()
 	{
 		cout << "HDestructor:\t" << this << endl;
 	}
 
 	//			Methods:
-	void info()
+	virtual void info()
 	{
 		cout << last_name << " " << first_name << " " << age << " лет" << endl;
 	}
+	virtual void duty() = 0;	//Îáÿçàííîñòè
 };
 
 class Student :public Human
@@ -94,6 +99,10 @@ public:
 		Human::info();
 		cout << "Специальность:\t" << speciality << ",\tгруппа:\t" << group << ",\tуспеваемость:" << rating << ";\n";
 	}
+	void duty()
+	{
+		cout << "Îñíîâíàÿ îáÿçàííîñòü: îáó÷àòü ñòóäåíòîâ" << endl;
+	}
 };
 class Teacher :public Human
 {
@@ -136,6 +145,10 @@ public:
 		Human::info();
 		cout << "Специальность:\t" << speciality << ", опыт работы преподавателем: " << experience_worke << " лет." << endl;
 	}
+	void duty()
+	{
+		cout << "Îñíîâíàÿ îáÿçàííîñòü: îáó÷àòü ñòóäåíòîâ" << endl;
+	}
 };
 
 class Graduate :public Student
@@ -174,9 +187,19 @@ public:
 	}
 };
 
+//#define INHERITANCE
+//#define REGEX
+#ifdef REGEX
+//#define RGX_NAME_CHECK
+#define RGX_EMAIL_CHECK  
+#endif // REGEX
+#define POLYMORPHISM
+
+
 void main()
 {
 	setlocale(LC_ALL, "");
+#ifdef INHERITANCE
 	Human human("Тупенко", "Василий", 18);
 	human.info();
 
@@ -188,4 +211,74 @@ void main()
 
 	Graduate jesse("Pinkman", "Jesse", 25, "Methamphitamine manufacturing", "WithWalter", 4.5, "Methamphitamine distribution");
 	jesse.info();
+#endif // INHERITANCE
+
+
+
+#ifdef REGEX
+/*
+https://www.cplusplus.com/reference/regex/
+https://www.cplusplus.com/reference/regex/ECMAScript/
+https://www.cplusplus.com/reference/regex/regex_match/
+*/
+
+#ifdef RGX_NAME_CHECK
+regex name_template("[A-Z][a-z]{1,30}");
+string name;
+cout << "Ââåäèòå èìÿ: "; cin >> name;
+//regex_match(íàøà_ñòðîêà, ðåãóëÿðíîå_âûðàæåíèå, øàáëîí_ïðîâåðêè);
+cout << regex_match(name.c_str(), name_template, std::regex_constants::match_any) << endl;
+#endif // RGX_NAME_CHECK
+
+#ifdef RGX_EMAIL_CHECK
+regex rgx("([A-Za-z0-9].){3,20}@[A-Za-z]{1,10}.[A-Za-z]{2,3}");
+string email = "vasya....tupenko@mail.ru";
+cout << regex_match(email, rgx, std::regex_constants::match_any) << endl;
+#endif // RGX_EMAIL_CHECK
+
+#endif // REGEX
+
+//Обобщение - Generalization
+/*Teacher teacher("Einstein", "Albert", 140, "Astronomy", 80);
+Student student("Ëîìîíîñîâ", "Ìèõàèë", 100, "Phisics", "SPD_011", 99);
+Human* p_teacher = &teacher;
+Human* p_student = &student;
+p_teacher->info();
+p_student->info();
+cout << delimiter << endl;*/
+int arr[] = { 3, 5, 8, 13, 21 };
+//Human h("Äóðêî", "Âèòàëèé", 20);
+Human* group[] =
+{
+	new Teacher("Einstein", "Albert", 140, "Astronomy", 80),
+	new Student("Øâåäåíêî", "Åâãåíèé", 35, "Ïðîâèçîð", "SPD_011", 99),
+	new Teacher("Ëîìîíîñîâ", "Ìèõàèë", 100, "Phisics", 75),
+	new Student("Ïåðìÿêîâ", "Ðîìàí", 36, "Èíæåíåð", "SPD_011",98),
+	new Graduate("Êóäðàòîâ", "Øàõçîä", 18, "ÐÏÎ", "SPD_011", 98, "Ðàçðàáîòêà èñêóñòâåííîãî èíòåëëåêòà")
+};
+cout << sizeof(group) << endl;
+for (int i = 0; i < sizeof(group) / sizeof(Human*); i++)
+{
+	cout << typeid(*group[i]).name() << endl;
+	group[i]->duty();
+	group[i]->info();
+	cout << delimiter << endl;
+}
+
+/*Student* group[] =
+{
+	new Student("Ïåðìÿêîâ", "Ðîìàí", 36, "Èíæåíåð", "SPD_011",98),
+	new Graduate("Êóäðàòîâ", "Øàõçîä", 18, "ÐÏÎ", "SPD_011", 98, "Ðàçðàáîòêà èñêóñòâåííîãî èíòåëëåêòà"),
+	new Student("Øâåäåíêî", "Åâãåíèé", 35, "Ïðîâèçîð", "SPD_012", 99)
+};*/
+/*for (int i = 0; i < sizeof(group) / sizeof(Human*); i++)
+{
+	if(group[i]->get_group() == "SPD_011")group[i]->info();
+	cout << delimiter << endl;
+}*/
+for (int i = 0; i < sizeof(group) / sizeof(Human*); i++)
+{
+	delete group[i];
+}
+
 }
