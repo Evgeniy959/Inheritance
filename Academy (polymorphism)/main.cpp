@@ -54,7 +54,7 @@ public:
 	{
 		cout << last_name << " " << first_name << " " << age << " лет" << endl;
 	}
-	virtual void duty() = 0;	//Îáÿçàííîñòè
+	virtual void duty() = 0;	//Обязанности
 };
 
 class Student :public Human
@@ -101,7 +101,7 @@ public:
 	}
 	void duty()
 	{
-		cout << "Îñíîâíàÿ îáÿçàííîñòü: îáó÷àòü ñòóäåíòîâ" << endl;
+		cout << "Основная обязанность: учиться" << endl;
 	}
 };
 class Teacher :public Human
@@ -147,7 +147,7 @@ public:
 	}
 	void duty()
 	{
-		cout << "Îñíîâíàÿ îáÿçàííîñòü: îáó÷àòü ñòóäåíòîâ" << endl;
+		cout << "Основная обязанность: обучать студентов" << endl;
 	}
 };
 
@@ -239,22 +239,24 @@ cout << regex_match(email, rgx, std::regex_constants::match_any) << endl;
 #endif // REGEX
 
 //Обобщение - Generalization
-/*Teacher teacher("Einstein", "Albert", 140, "Astronomy", 80);
-Student student("Ëîìîíîñîâ", "Ìèõàèë", 100, "Phisics", "SPD_011", 99);
+Teacher teacher("Einstein", "Albert", 140, "Astronomy", 80);
+Student student("Ломоносов", "Михаил", 100, "Phisics", "SPD_011", 99);
+
 Human* p_teacher = &teacher;
 Human* p_student = &student;
+
 p_teacher->info();
 p_student->info();
-cout << delimiter << endl;*/
+cout << delimiter << endl;
 int arr[] = { 3, 5, 8, 13, 21 };
-//Human h("Äóðêî", "Âèòàëèé", 20);
+//Human h("Дурко", "Виталий", 20);
 Human* group[] =
 {
 	new Teacher("Einstein", "Albert", 140, "Astronomy", 80),
-	new Student("Øâåäåíêî", "Åâãåíèé", 35, "Ïðîâèçîð", "SPD_011", 99),
-	new Teacher("Ëîìîíîñîâ", "Ìèõàèë", 100, "Phisics", 75),
-	new Student("Ïåðìÿêîâ", "Ðîìàí", 36, "Èíæåíåð", "SPD_011",98),
-	new Graduate("Êóäðàòîâ", "Øàõçîä", 18, "ÐÏÎ", "SPD_011", 98, "Ðàçðàáîòêà èñêóñòâåííîãî èíòåëëåêòà")
+	new Student("Шведенко", "Евгений", 35, "Провизор", "SPD_011", 99),
+	new Teacher("Ломоносов", "Михаил", 100, "Phisics", 75),
+	new Student("Перьмяков", "Роман", 36, "инженер", "SPD_011",98),
+	new Graduate("Кудратов", "Шахзод", 18, "РПО", "SPD_011", 98, "Разработка искуственного интелекта")
 };
 cout << sizeof(group) << endl;
 for (int i = 0; i < sizeof(group) / sizeof(Human*); i++)
@@ -267,9 +269,9 @@ for (int i = 0; i < sizeof(group) / sizeof(Human*); i++)
 
 /*Student* group[] =
 {
-	new Student("Ïåðìÿêîâ", "Ðîìàí", 36, "Èíæåíåð", "SPD_011",98),
-	new Graduate("Êóäðàòîâ", "Øàõçîä", 18, "ÐÏÎ", "SPD_011", 98, "Ðàçðàáîòêà èñêóñòâåííîãî èíòåëëåêòà"),
-	new Student("Øâåäåíêî", "Åâãåíèé", 35, "Ïðîâèçîð", "SPD_012", 99)
+	new Student("Перьмяков", "Роман", 36, "инженер", "SPD_011",98),
+	new Graduate("Кудратов", "Шахзод", 18, "РПО", "SPD_011", 98, "Разработка искуственного интелекта"),
+	new Student("Шведенко", "Евгений", 35, "Провизор", "SPD_012", 99)
 };*/
 /*for (int i = 0; i < sizeof(group) / sizeof(Human*); i++)
 {
