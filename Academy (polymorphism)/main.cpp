@@ -225,8 +225,8 @@ https://www.cplusplus.com/reference/regex/regex_match/
 #ifdef RGX_NAME_CHECK
 regex name_template("[A-Z][a-z]{1,30}");
 string name;
-cout << "Ââåäèòå èìÿ: "; cin >> name;
-//regex_match(íàøà_ñòðîêà, ðåãóëÿðíîå_âûðàæåíèå, øàáëîí_ïðîâåðêè);
+cout << "Введите имя: "; cin >> name;
+//regex_match(строка для проверки (наша строка), регулярное выражение, шаблон проверки);
 cout << regex_match(name.c_str(), name_template, std::regex_constants::match_any) << endl;
 #endif // RGX_NAME_CHECK
 
