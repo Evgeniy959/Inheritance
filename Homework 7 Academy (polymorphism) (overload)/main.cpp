@@ -5,8 +5,6 @@ using namespace std;
 
 #define delimiter "\n-------------------------------------------------------\n"
 
-//ostream& operator<<(ostream& os, const Human& obj);
-
 class Human
 {
 	string last_name;
@@ -55,9 +53,9 @@ public:
 	{
 		cout << last_name << " " << first_name << " " << age << " лет" << endl;
 	}
-	virtual void duty() = 0;	//Обязанности
+	//virtual void duty() = 0;	//Обязанности
 };
-ostream & operator<<(ostream & os, const Human & obj)
+ostream& operator<<(ostream& os, const Human& obj)
 {
 	return os << obj.get_last_name() << " " << obj.get_first_name() << ", " << obj.get_age() << " лет";
 }
@@ -109,6 +107,10 @@ public:
 		cout << "Основная обязанность: учиться" << endl;
 	}
 };
+ostream& operator<<(ostream& os, const Student& obj)
+{
+	return os << (Human)obj << ", " << obj.get_speciality() << " " << obj.get_group() << " " << obj.get_rating();
+}
 class Teacher :public Human
 {
 	string speciality;
@@ -155,6 +157,11 @@ public:
 		cout << "Основная обязанность: обучать студентов" << endl;
 	}
 };
+ostream& operator<<(ostream& os, const Teacher& obj)
+{
+	os << (Human)obj << ", ";
+	return os << obj.get_speciality() << ", опыт работы преподавателем: " << obj.get_experience_worke() << " лет";
+}
 
 class Graduate :public Student
 {
@@ -191,6 +198,10 @@ public:
 		cout << "Тема дипломного проекта: " << diploma_theme << endl;
 	}
 };
+ostream& operator<<(ostream& os, const Graduate& obj)
+{
+	return os << (Student)obj << obj.get_diploma_theme();
+}
 
 //#define INHERITANCE
 //#define REGEX
@@ -267,7 +278,11 @@ void main()
 	for (int i = 0; i < sizeof(group) / sizeof(Human*); i++)
 	{
 		cout << typeid(*group[i]).name() << endl;
-		group[i]->duty();
+		//group[i]->duty();
+		//cout << *group[i] << ", ";
+		/*if(typeid(*group[i]) == typeid(Student))cout << *dynamic_cast<Student*>(group[i]);
+		if(typeid(*group[i]) == typeid(Teacher))cout << *dynamic_cast<Teacher*>(group[i]);
+		if(typeid(*group[i]) == typeid(Graduate))cout << *dynamic_cast<Graduate*>(group[i]);*/
 		cout << *group[i] << endl;
 		//group[i]->info();
 		cout << delimiter << endl;
