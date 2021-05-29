@@ -1,4 +1,10 @@
-﻿#include<iostream>
+﻿/*В проекте Academy для всех классов перегрузить оператор вывода(<< ) и вывести группу на экран с его использованием;
+for (int i = 0; i < sizeof(group) / sizeof(Human*); i++)
+{
+	cout << *group[i] << endl;
+}*/
+
+#include<iostream>
 #include<string>
 #include<regex>
 using namespace std;
@@ -53,11 +59,17 @@ public:
 	{
 		cout << last_name << " " << first_name << " " << age << " лет" << endl;
 	}
-	//virtual void duty() = 0;	//Обязанности
+	virtual void Display(ostream& os, const Human& obj) const
+	{
+		os << obj.get_last_name() << " " << obj.get_first_name() << ", " << obj.get_age() << " лет";
+	}
+//                   Friends:
+	friend ostream& operator<<(ostream& os, const Human& obj);
 };
 ostream& operator<<(ostream& os, const Human& obj)
 {
-	return os << obj.get_last_name() << " " << obj.get_first_name() << ", " << obj.get_age() << " лет";
+	obj.Display(os, obj);
+	return os;
 }
 
 class Student :public Human
@@ -102,14 +114,17 @@ public:
 		Human::info();
 		cout << "Специальность:\t" << speciality << ",\tгруппа:\t" << group << ",\tуспеваемость:" << rating << ";\n";
 	}
-	void duty()
+	void Display(ostream& os, const Student& obj)  
 	{
-		cout << "Основная обязанность: учиться" << endl;
+		os << (Human)obj << ", " << obj.get_speciality() << " " << obj.get_group() << " " << obj.get_rating();
 	}
+	//                   Friends:
+	friend ostream& operator<<(ostream& os, const Student& obj);
 };
-ostream& operator<<(ostream& os, const Student& obj)
+ostream& operator<<(ostream& os, Student& obj)
 {
-	return os << (Human)obj << ", " << obj.get_speciality() << " " << obj.get_group() << " " << obj.get_rating();
+	obj.Display(os, obj);
+	return os;
 }
 class Teacher :public Human
 {
@@ -152,17 +167,11 @@ public:
 		Human::info();
 		cout << "Специальность:\t" << speciality << ", опыт работы преподавателем: " << experience_worke << " лет." << endl;
 	}
-	void duty()
+	void Display(ostream& os, const Teacher& obj) const
 	{
-		cout << "Основная обязанность: обучать студентов" << endl;
+		os << obj.get_speciality() << ", опыт работы преподавателем: " << obj.get_experience_worke() << " лет";
 	}
 };
-ostream& operator<<(ostream& os, const Teacher& obj)
-{
-	os << (Human)obj << ", ";
-	return os << obj.get_speciality() << ", опыт работы преподавателем: " << obj.get_experience_worke() << " лет";
-}
-
 class Graduate :public Student
 {
 	string diploma_theme;
@@ -197,12 +206,11 @@ public:
 		Student::info();
 		cout << "Тема дипломного проекта: " << diploma_theme << endl;
 	}
+	void Display(ostream& os, const Graduate& obj) const
+	{
+		os << obj.get_diploma_theme();
+	}
 };
-ostream& operator<<(ostream& os, const Graduate& obj)
-{
-	return os << (Student)obj << obj.get_diploma_theme();
-}
-
 //#define INHERITANCE
 //#define REGEX
 #ifdef REGEX
@@ -278,11 +286,6 @@ void main()
 	for (int i = 0; i < sizeof(group) / sizeof(Human*); i++)
 	{
 		cout << typeid(*group[i]).name() << endl;
-		//group[i]->duty();
-		//cout << *group[i] << ", ";
-		/*if(typeid(*group[i]) == typeid(Student))cout << *dynamic_cast<Student*>(group[i]);
-		if(typeid(*group[i]) == typeid(Teacher))cout << *dynamic_cast<Teacher*>(group[i]);
-		if(typeid(*group[i]) == typeid(Graduate))cout << *dynamic_cast<Graduate*>(group[i]);*/
 		cout << *group[i] << endl;
 		//group[i]->info();
 		cout << delimiter << endl;

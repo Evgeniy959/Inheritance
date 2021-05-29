@@ -288,8 +288,8 @@ void main()
 		/*if(typeid(*group[i]) == typeid(Student))cout << *dynamic_cast<Student*>(group[i]);
 		if(typeid(*group[i]) == typeid(Teacher))cout << *dynamic_cast<Teacher*>(group[i]);
 		if(typeid(*group[i]) == typeid(Graduate))cout << *dynamic_cast<Graduate*>(group[i]);*/
-		cout << *group[i] << endl;
-		//group[i]->info();
+		//cout << *group[i] << endl;
+		group[i]->info();
 		cout << delimiter << endl;
 	}
 
