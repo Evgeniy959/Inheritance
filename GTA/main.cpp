@@ -1,58 +1,82 @@
-﻿#include<iostream>
+﻿//Построить иерархию объектов игры GTA
+
+#include<iostream>
 using namespace std;
 
-class Animal
+class Weapon
 {
 public:
-	virtual void sound() = 0;	//Чисто виртуальный метод - Pure Virtual Function (Method)
+	virtual void function() = 0;	//Чисто виртуальный метод - Pure Virtual Function (Method)
 	//Этот метод НЕ имеет определения (реализации), но он обязательно должен быть определен в дочернем классе,
 	//иначе дочерний класс тоже будет абстрактным.
 };
-
-class Cat :public Animal
+class Firearms :public Weapon
 {
 public:
-	void sound()
+	virtual void function() = 0;
+};
+class Pistol :public Firearms
+{
+public:
+	void function()
 	{
-		cout << "Мяу" << endl;
+		cout << "Одиночные выстрелы" << endl;
 	}
 };
 
-class Human :public Animal
+class Automat :public Firearms
 {
 public:
-	void sound()
+	void function()
 	{
-		cout << "Ну тут все сложно" << endl;
+		cout << "Выстрелы очередью" << endl;
 	}
 };
 
-class Dog :public Animal
+class Grenade :public Firearms
 {
 public:
-	void sound()
+	void function()
 	{
-		cout << "Гав" << endl;
+		cout << "Взрыв" << endl;
 	}
 };
 
+class cold :public Weapon
+{
+public:
+	virtual void function() = 0;
+};
+class Dagger :public cold
+{
+public:
+	void function()
+	{
+		cout << "Режет" << endl;
+	}
+};
+class Bit :public cold
+{
+public:
+	void function()
+	{
+		cout << "Сильно бьет" << endl;
+	}
+};
 void main()
 {
 	setlocale(LC_ALL, "Russian");
-	//Animal a;
-	//Cat cat;
 
-	Animal* zoo[] =
+	Weapon* W[] =
 	{
-		new Cat(),
-		new Dog(),
-		new Cat(),
-		new Human,
-		new Cat(),
-		new Dog()
+		new Pistol(),
+		new Automat(),
+		new Grenade(),
+		new Dagger(),
+		new Bit(),
 	};
-	for (int i = 0; i < sizeof(zoo) / sizeof(Animal*); i++)
+	for (int i = 0; i < sizeof(W) / sizeof(Weapon*); i++)
 	{
-		zoo[i]->sound();
+		W[i]->function();
 	}
 } 
