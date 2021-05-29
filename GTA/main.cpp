@@ -3,14 +3,12 @@
 #include<iostream>
 using namespace std;
 
-class Weapon
+class Weapon         //Абстрактный класс
 {
 public:
-	virtual void function() = 0;	//Чисто виртуальный метод - Pure Virtual Function (Method)
-	//Этот метод НЕ имеет определения (реализации), но он обязательно должен быть определен в дочернем классе,
-	//иначе дочерний класс тоже будет абстрактным.
+	virtual void function() = 0;	//Чисто виртуальный метод 
 };
-class Firearms :public Weapon
+class Firearms :public Weapon         //Тоже абстрактный класс
 {
 public:
 	virtual void function() = 0;
